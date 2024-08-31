@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/swiper-bundle.min.css">
+
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        
+        <link rel="stylesheet" href="css/styles.css">
+
+        <title>Landing Page</title>
+    </head>
+    <body>
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-chevron-up scrolltop__icon' ></i>
+        </a>
+
+        <header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <a href="/" class="nav__logo">Andrew Catoiu</a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="/home" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="/home#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="/home#services" class="nav__link">Services</a></li>
+                        <li class="nav__item"><a href="/home#portfolio" class="nav__link">Portfolio</a></li>
+                        <li class="nav__item"><a href="/home#contact" class="nav__link">Contact</a></li>
+                        <li class="nav__item"><a href="/admin" class="nav__link active-link">Admin</a></li>
+                        <li class="nav__item"><a href="/logout" class="nav__link">Logout</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="l-main">
+            <!-- Admin - About -->
+            <section class="section bd-container" id="contact">
+                <h2 class="section-title">About</h2>
+
+                <div class="about__container bd-grid">
+                    <div class="admin-about__data bd-grid">
+                        <p class="admin-about__description">
+                            <span>
+                                Hello, I am<br>
+                            </span>
+                            <% aboutData.forEach(function(record) { %>
+                                <%= record.description %>
+                            <% }); %>
+                        </p>
+                    </div>
+
+                    <% aboutData.forEach(function(record) { %>
+                        <img src="<%= record.image_path %>" alt="" class="about__img">
+                    <% }); %>
+                </div>
+
+                <br><br>
+
+                <div class="projects__container add-grid__container">
+                    <form action="" method="POST" class="projects__form" enctype="multipart/form-data">
+                        <textarea name="newAboutDescription" id="" cols="2" rows="0" maxlength="500" placeholder="About me description" class="projects__input admin-about-input"></textarea>
+                        <button type="submit" class="button projects__button">Update Description</button>
+                    </form>
+
+                    <form action="" method="POST" class="projects__form" enctype="multipart/form-data">
+                        <input type="file" name="aboutImage" value="About-Photo" class="projects__input admin-about-input" accept="image/*">
+                        <button type="submit" class="button projects__button">Upload Photo</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Admin - Qualification -->
+            <section class="section bd-container">
+                <h2 class="section-title">Qualification</h2>
+
+                <div class="qualification__container bd-grid">
+                    <div class="qualification__content">
+                        <h2 class="qualification__title">
+                            <i class='bx bx-briefcase-alt qualification__title-icon'></i>
+                            Work Experience
+                        </h2>
+
+                        <div class="bd-grid">
+                            <% qualificationData.forEach(function(qual) { %>
+                                <% if (qual.category === 'work_experience') { %>
+                                    <div class="qualification__data">
+                                        <h3 class="qualification__area"><%= qual.title %></h3>
+
+                                        <div class="qualification__box">
+                                            <span class="qualification__work">
+                                                <i class='bx bx-briefcase-alt qualification__icon'></i>
+                                                <%= qual.location %>
+                                            </span>
+
+                                            <span class="qualification__work">
+                                                <i class='bx bx-calendar-alt qualification__icon'></i>
+                                                <%= qual.time_span %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <div class="qualification__content">
+                        <h2 class="qualification__title">
+                            <i class='bx bx-book-bookmark qualification__title-icon'></i>
+                            Education
+                        </h2>
+
+                        <div class="bd-grid">
+                            <% qualificationData.forEach(function(qual) { %>
+                                <% if (qual.category === 'education') { %>
+                                    <div class="qualification__data">
+                                        <h3 class="qualification__area"><%= qual.title %></h3>
+
+                                        <div class="qualification__box">
+                                            <span class="qualification__work">
+                                                <i class='bx bx-book-alt qualification__icon'></i>
+                                                <%= qual.location %>
+                                            </span>
+
+                                            <span class="qualification__work">
+                                                <i class='bx bx-calendar-alt qualification__icon'></i>
+                                                <%= qual.time_span %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+
+                <div class="projects__container add-grid__container">
+                    <form action="" method="POST" class="projects__form" enctype="multipart/form-data">
+                        <input type="text" name="newQualTitle" placeholder="Title" class="projects__input">
+                        <input type="text" name="newLocation" placeholder="Location" class="projects__input">                    
+                        <input type="text" name="newTimeSpan" placeholder="Time Span" class="projects__input">
+                        <select id="category" class="projects__input" name="qualCategory" required>
+                            <option value="" disabled selected>Category</option>
+                            <option value="work_experience">Work Experience</option>
+                            <option value="education">Education</option>
+                        </select>
+                        <button type="submit" class="button projects__button">Add Qualification</button>
+                    </form>
+
+                    <form action="" method="POST" class="projects__form" enctype="multipart/form-data">
+                        <input type="text" name="deleteQualificationID" placeholder="ID" class="projects__input">
+                        <button type="submit" class="button projects__button">Delete Qualification</button>
+                    </form>
+                </div>
+            </section>
+
+
+
+
+            <!-- Admin - Portfolio -->
+            <section class="section bd-container" id="contact">
+                <h2 class="admin-section-title">Projects</h2>
+
+                <div class="portfolio__nav">
+                    <span class="portfolio__item active-portfolio" data-filter="all">All</span>
+                    <span class="portfolio__item" data-filter=".web">Web</span>
+                    <span class="portfolio__item" data-filter=".other">Other</span>
+                </div>
+
+                <div class="portfolio__container bd-grid">
+                    <% projectsData.forEach(function(project) { %>
+                        <div class="portfolio__content mix <%= project.focus === 'Website' ? 'web' : 'other' %>">
+                            <a href="<%= project.link %>"><img src="<%= project.image_path %>" alt="" class="portfolio__img"></a>
+                            <div class="portfolio__data">
+                                <span class="portfolio__subtitle"><%= project.focus %></span>
+                                <a href="<%= project.link %>"><h2 class="portfolio__title"><%= project.title %></h2></a>
+                                <a href="<%= project.link %>" class="button button-link"><%= project.description %></a>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+
+                <br><br>
+
+                <div class="projects__container add-grid__container">
+                    <form action="" method="POST" class="projects__form" enctype="multipart/form-data">
+                        <input type="text" name="newFocus" placeholder="Focus" class="projects__input">
+                        <input type="text" name="newTitle" placeholder="Title" class="projects__input">                    
+                        <input type="text" name="newLink" placeholder="Link" class="projects__input">
+                        <textarea name="newDescription" id="" cols="2" rows="0" maxlength="34" placeholder="Description" class="projects__input"></textarea>
+                        <input type="file" name="projectImage" value="Thumbnail" class="projects__input" accept="image/*">
+                        <button type="submit" class="button projects__button">Add Project</button>
+                    </form>
+
+                    <form action="" method="POST" class="projects__form" enctype="multipart/form-data">
+                        <input type="text" name="deleteProjectID" placeholder="ID" class="projects__input">
+                        <button type="submit" class="button projects__button">Delete Project</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+
+        <script src="js/mixitup.min.js"></script>
+
+        <script src="js/swiper-bundle.min.js"></script>
+
+        <script src="js/gsap.min.js"></script>
+
+        <script src="js/main.js"></script>
+    </body>
+</html>
